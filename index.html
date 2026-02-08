@@ -1,83 +1,265 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8">
-  <title>Absensi Pintar</title>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    <?!= include("style"); ?>
-  </style>
-</head>
-<body>
+:root {
+  --primary: #2563eb;
+  --secondary: #64748b;
+  --success: #16a34a;
+  --bg: #0f172a;
+  --glass: rgba(255,255,255,0.12);
+  --border: rgba(255,255,255,0.25);
+}
 
-  <div class="blob blob-1"></div>
-  <div class="blob blob-2"></div>
+* {
+  box-sizing: border-box;
+}
 
-  <div class="main-container">
-    
-    <header>
-      <div class="logo-container">📍</div>
-      <div class="header-text">
-        <h1>Absensi Digital</h1>
-        <p>SMK Indonesia Maju</p>
-      </div>
-    </header>
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Outfit', sans-serif;
+  background: radial-gradient(circle at top, #1e293b, #020617);
+  color: #e5e7eb;
+  overflow-x: hidden;
+}
 
-    <div class="card glass-effect">
-      
-      <div id="section-login" class="fade-in">
-        <div class="welcome-msg">Silakan Masuk</div>
-        <div class="input-group">
-          <input id="nis" type="number" placeholder="Nomor Induk Siswa (NIS)" autocomplete="off">
-        </div>
-        <div class="input-group">
-          <input id="pin" type="password" placeholder="Kode PIN">
-        </div>
-        <button onclick="handleLogin()" class="btn btn-primary ripple">
-          Masuk Sekarang ➜
-        </button>
-      </div>
+/* ===== BACKGROUND BLOBS ===== */
+.blob {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, #2563eb, transparent 70%);
+  filter: blur(70px);
+  opacity: .5;
+  z-index: 0;
+}
+.blob-1 { top: -80px; left: -80px; }
+.blob-2 { bottom: -100px; right: -100px; }
 
-      <div id="section-absen" class="hidden">
-        <div class="user-badge">
-          <div class="avatar-initial" id="avatarLetter">U</div>
-          <div>
-            <h2 id="dispNama">Siswa</h2>
-            <span id="dispKelas" class="badge-kelas">Kelas ...</span>
-          </div>
-        </div>
+/* ===== MAIN LAYOUT ===== */
+.main-container {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
 
-        <div class="camera-wrapper">
-          <video id="video" autoplay playsinline></video>
-          <canvas id="canvas" hidden></canvas>
-          <img id="hasilFoto" class="hidden">
-          <div class="scan-line"></div>
-        </div>
-        
-        <p class="status-text" id="camStatus">Pastikan wajah terlihat jelas</p>
+header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
 
-        <button onclick="ambilFoto()" id="btnCapture" class="btn btn-primary ripple">
-          📸 Ambil Foto
-        </button>
+.logo-container {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
 
-        <div id="confirm-buttons" class="hidden grid-2">
-          <button onclick="ulangFoto()" class="btn btn-secondary ripple">🔄 Ulang</button>
-          <button onclick="kirimAbsen()" class="btn btn-success ripple">✅ Kirim</button>
-        </div>
-      </div>
+.header-text h1 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+.header-text p {
+  margin: 0;
+  font-size: 13px;
+  color: #cbd5f5;
+}
 
-    </div>
-  </div>
-  
-  <div id="loadingOverlay" class="hidden">
-    <div class="spinner"></div>
-    <div class="loading-text">Memproses Data...</div>
-  </div>
+/* ===== CARD ===== */
+.card {
+  width: 100%;
+  max-width: 420px;
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 22px;
+  box-shadow: 0 30px 60px rgba(0,0,0,.4);
+}
 
-  <div id="toast">Pesan Notifikasi</div>
+/* ===== LOGIN ===== */
+.welcome-msg {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
 
-  <script>
-    <?!= include("script"); ?>
-  </script>
-</body>
-</html>
+.input-group input {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: rgba(0,0,0,.3);
+  color: white;
+  font-size: 14px;
+  outline: none;
+  margin-bottom: 12px;
+}
+.input-group input::placeholder {
+  color: #cbd5f5;
+}
+
+/* ===== BUTTON ===== */
+.btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .15s, box-shadow .15s, opacity .15s;
+}
+.btn:active {
+  transform: scale(.97);
+}
+.btn-primary {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+}
+.btn-secondary {
+  background: #334155;
+  color: white;
+}
+.btn-success {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  color: white;
+}
+
+/* ===== USER BADGE ===== */
+.user-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.avatar-initial {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.badge-kelas {
+  display: inline-block;
+  background: rgba(255,255,255,.15);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+/* ===== CAMERA ===== */
+.camera-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 18px;
+  overflow: hidden;
+  background: black;
+  margin-bottom: 10px;
+}
+
+video, img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scan-line {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255,255,255,.8);
+  animation: scan 2.5s infinite;
+}
+
+@keyframes scan {
+  0% { top: 0; }
+  100% { top: 100%; }
+}
+
+.status-text {
+  text-align: center;
+  font-size: 13px;
+  color: #cbd5f5;
+  margin-bottom: 10px;
+}
+
+/* ===== GRID ===== */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* ===== LOADING ===== */
+#loadingOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 99;
+}
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255,255,255,.2);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* ===== TOAST ===== */
+#toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #020617;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 999px;
+  opacity: 0;
+  transition: opacity .3s, transform .3s;
+  z-index: 100;
+}
+#toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-6px);
+}
+
+/* ===== UTIL ===== */
+.hidden {
+  display: none !important;
+}
+.fade-in {
+  animation: fade .4s ease;
+}
+@keyframes fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
