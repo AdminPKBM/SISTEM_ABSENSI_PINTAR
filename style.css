@@ -1,0 +1,197 @@
+<style>
+  :root {
+    --primary: #4f46e5; /* Indigo */
+    --primary-dark: #4338ca;
+    --success: #10b981;
+    --bg-color: #f3f4f6;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --card-bg: rgba(255, 255, 255, 0.85);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Background Decoration (Blobs) */
+  .bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    opacity: 0.6;
+  }
+  .circle-1 { width: 300px; height: 300px; background: #a5b4fc; top: -50px; left: -50px; }
+  .circle-2 { width: 250px; height: 250px; background: #fcd34d; bottom: -50px; right: -50px; }
+
+  .main-container {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+    z-index: 10;
+  }
+
+  /* Header */
+  header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  .logo {
+    font-size: 2.5rem;
+    background: white;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  }
+  header h1 { font-size: 1.5rem; font-weight: 700; color: var(--text-main); line-height: 1.2; }
+  header p { font-size: 0.9rem; color: var(--text-muted); }
+
+  /* Glass Card */
+  .card {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+  }
+
+  /* Inputs */
+  .input-group { margin-bottom: 20px; }
+  .input-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+  input {
+    width: 100%;
+    padding: 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: 0.3s;
+    background: rgba(255,255,255,0.9);
+  }
+  input:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+  }
+
+  /* Buttons */
+  button {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Poppins', sans-serif;
+  }
+  button:active { transform: scale(0.98); }
+  
+  .btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+  }
+  .btn-success {
+    background: var(--success);
+    color: white;
+    box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+    margin-bottom: 10px;
+  }
+  .btn-secondary {
+    background: white;
+    color: var(--text-main);
+    border: 2px solid #e5e7eb;
+  }
+
+  /* Camera UI */
+  .user-info { text-align: center; margin-bottom: 20px; }
+  .user-info h2 { font-size: 1.25rem; margin-bottom: 5px; }
+  .badge {
+    background: #e0e7ff; color: var(--primary);
+    padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+  }
+
+  .camera-wrapper {
+    width: 100%;
+    aspect-ratio: 3/4; /* Rasio Portrait Pas Foto */
+    background: #000;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+  video, #hasilFoto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1); /* Mirror effect */
+  }
+  
+  .status-text {
+    text-align: center; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;
+  }
+
+  /* Footer */
+  footer { text-align: center; margin-top: 30px; color: #9ca3af; font-size: 0.8rem; }
+
+  /* Utilities */
+  .hidden { display: none !important; }
+  .fade-in { animation: fadeIn 0.5s ease-in-out; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* Loading Overlay */
+  #loadingOverlay {
+    position: fixed; inset: 0; background: rgba(255,255,255,0.9);
+    z-index: 100; display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+  }
+  .spinner {
+    width: 40px; height: 40px; border: 4px solid #e5e7eb;
+    border-top: 4px solid var(--primary); border-radius: 50%;
+    animation: spin 1s linear infinite; margin-bottom: 15px;
+  }
+  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+  /* Toast Notification */
+  .toast {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+    background: #333; color: white; padding: 12px 24px; border-radius: 30px;
+    font-size: 0.9rem; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    z-index: 200; opacity: 0; transition: opacity 0.3s; pointer-events: none;
+  }
+  .toast.show { opacity: 1; bottom: 40px; }
+  .toast.error { background: #ef4444; }
+  .toast.success { background: #10b981; }
+</style>
