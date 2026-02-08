@@ -2,7 +2,6 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Absensi Pintar</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
@@ -10,10 +9,12 @@
   </style>
 </head>
 <body>
+
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
 
   <div class="main-container">
+    
     <header>
       <div class="logo-container">📍</div>
       <div class="header-text">
@@ -23,37 +24,57 @@
     </header>
 
     <div class="card glass-effect">
+      
       <div id="section-login" class="fade-in">
+        <div class="welcome-msg">Silakan Masuk</div>
         <div class="input-group">
-          <input id="nis" type="number" placeholder="NIS Siswa">
+          <input id="nis" type="number" placeholder="Nomor Induk Siswa (NIS)" autocomplete="off">
         </div>
         <div class="input-group">
           <input id="pin" type="password" placeholder="Kode PIN">
         </div>
-        <button onclick="handleLogin()" class="btn btn-primary">Masuk</button>
+        <button onclick="handleLogin()" class="btn btn-primary ripple">
+          Masuk Sekarang ➜
+        </button>
       </div>
 
       <div id="section-absen" class="hidden">
         <div class="user-badge">
-          <h2 id="dispNama">Siswa</h2>
-          <span id="dispKelas">Kelas</span>
+          <div class="avatar-initial" id="avatarLetter">U</div>
+          <div>
+            <h2 id="dispNama">Siswa</h2>
+            <span id="dispKelas" class="badge-kelas">Kelas ...</span>
+          </div>
         </div>
+
         <div class="camera-wrapper">
           <video id="video" autoplay playsinline></video>
           <canvas id="canvas" hidden></canvas>
           <img id="hasilFoto" class="hidden">
+          <div class="scan-line"></div>
         </div>
-        <button onclick="ambilFoto()" id="btnCapture" class="btn btn-primary">📸 Ambil Foto</button>
-        <div id="confirm-buttons" class="hidden">
-          <button onclick="kirimAbsen()" class="btn btn-success">✅ Kirim</button>
-          <button onclick="ulangFoto()" class="btn btn-secondary">🔄 Ulang</button>
+        
+        <p class="status-text" id="camStatus">Pastikan wajah terlihat jelas</p>
+
+        <button onclick="ambilFoto()" id="btnCapture" class="btn btn-primary ripple">
+          📸 Ambil Foto
+        </button>
+
+        <div id="confirm-buttons" class="hidden grid-2">
+          <button onclick="ulangFoto()" class="btn btn-secondary ripple">🔄 Ulang</button>
+          <button onclick="kirimAbsen()" class="btn btn-success ripple">✅ Kirim</button>
         </div>
       </div>
+
     </div>
   </div>
   
-  <div id="loadingOverlay" class="hidden">⏳ Memproses...</div>
-  <div id="toast" class="hidden">Notifikasi</div>
+  <div id="loadingOverlay" class="hidden">
+    <div class="spinner"></div>
+    <div class="loading-text">Memproses Data...</div>
+  </div>
+
+  <div id="toast">Pesan Notifikasi</div>
 
   <script>
     <?!= include("script"); ?>
