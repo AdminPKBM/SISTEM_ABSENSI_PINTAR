@@ -1,168 +1,22 @@
 <style>
-  :root {
-    --primary: #6366f1; /* Indigo 500 */
-    --primary-dark: #4f46e5;
-    --secondary: #f1f5f9;
-    --success: #10b981;
-    --text-dark: #1e293b;
-    --text-light: #64748b;
-    --card-bg: rgba(255, 255, 255, 0.75);
-    --glass-border: rgba(255, 255, 255, 0.5);
-    --shadow: 0 10px 40px -10px rgba(0,0,0,0.1);
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent; }
-
-  body {
-    font-family: 'Outfit', sans-serif;
-    background: #eef2ff;
-    color: var(--text-dark);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow-x: hidden;
-    position: relative;
-  }
-
-  /* --- Animated Background Blobs --- */
-  .blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(60px);
-    z-index: -1;
-    opacity: 0.7;
-    animation: move 10s infinite alternate;
-  }
-  .blob-1 { top: -10%; left: -10%; width: 300px; height: 300px; background: #c7d2fe; animation-delay: 0s; }
-  .blob-2 { bottom: -10%; right: -10%; width: 250px; height: 250px; background: #fcd34d; animation-delay: 2s; }
-  .blob-3 { top: 40%; left: 40%; width: 200px; height: 200px; background: #f472b6; opacity: 0.4; animation-delay: 4s; }
-
-  @keyframes move {
-    from { transform: translate(0, 0) scale(1); }
-    to { transform: translate(20px, -20px) scale(1.1); }
-  }
-
-  .main-container { width: 100%; max-width: 400px; padding: 24px; position: relative; z-index: 10; }
-
-  /* --- Header --- */
-  header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
-  .logo-container {
-    width: 52px; height: 52px; background: white; border-radius: 14px;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
-    font-size: 24px;
-  }
-  .header-text h1 { font-size: 1.25rem; font-weight: 700; color: var(--text-dark); line-height: 1.2; }
-  .header-text p { font-size: 0.85rem; color: var(--text-light); }
-
-  /* --- Glass Card --- */
-  .card {
-    background: var(--card-bg);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    padding: 32px 24px;
-    box-shadow: var(--shadow);
-  }
-
-  .section-content { display: flex; flex-direction: column; gap: 16px; }
-  .login-header { text-align: center; margin-bottom: 8px; }
-  .login-header h3 { font-size: 1.5rem; font-weight: 700; }
-  .login-header p { color: var(--text-light); font-size: 0.9rem; }
-
-  /* --- Inputs --- */
-  .input-group { position: relative; }
-  .icon-input {
-    position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
-    font-size: 1.2rem; z-index: 2; pointer-events: none; opacity: 0.7;
-  }
-  input {
-    width: 100%; padding: 16px 16px 16px 50px;
-    border: 2px solid transparent; background: rgba(255,255,255,0.6);
-    border-radius: 16px; font-size: 1rem; font-family: inherit;
-    transition: all 0.3s ease; color: var(--text-dark);
-  }
-  input:focus {
-    background: white; border-color: var(--primary); outline: none;
-    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
-  }
-
-  /* --- Buttons --- */
-  .btn {
-    width: 100%; padding: 16px; border-radius: 16px; border: none;
-    font-size: 1rem; font-weight: 600; font-family: inherit; cursor: pointer;
-    display: flex; justify-content: center; align-items: center; gap: 8px;
-    transition: transform 0.1s, box-shadow 0.2s;
-  }
-  .btn:active { transform: scale(0.97); }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    color: white; box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
-  }
-  .btn-secondary { background: white; color: var(--text-dark); border: 1px solid #e2e8f0; }
-  .btn-success { background: var(--success); color: white; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3); }
-
-  /* --- User Info --- */
-  .user-badge {
-    display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.5);
-    padding: 12px; border-radius: 16px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.6);
-  }
-  .avatar-placeholder {
-    width: 44px; height: 44px; background: var(--primary); color: white;
-    border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
-  }
-  .user-details h2 { font-size: 1rem; margin-bottom: 2px; }
-  .badge { background: #dbeafe; color: #2563eb; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
-
-  /* --- Camera UI --- */
-  .camera-container { position: relative; margin: 10px 0; }
-  .camera-wrapper {
-    width: 100%; aspect-ratio: 3/4; background: #000;
-    border-radius: 20px; overflow: hidden; position: relative;
-  }
-  video, #hasilFoto { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); display: block;}
+  :root { --primary: #6366f1; --bg: #eef2ff; --text: #1e293b; }
+  body { font-family: 'Outfit', sans-serif; background: var(--bg); display: flex; justify-content: center; min-height: 100vh; margin: 0; }
   
-  /* Scan Effect */
-  .scan-overlay { position: absolute; inset: 0; pointer-events: none; }
-  .scan-line {
-    width: 100%; height: 3px; background: #00ffaa;
-    box-shadow: 0 0 10px #00ffaa;
-    animation: scan 2.5s ease-in-out infinite;
-  }
-  @keyframes scan { 0% { transform: translateY(0); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(400px); opacity: 0; } }
+  .blob { position: absolute; border-radius: 50%; filter: blur(60px); z-index: -1; }
+  .blob-1 { top: -10%; left: -10%; width: 300px; height: 300px; background: #c7d2fe; }
+  .blob-2 { bottom: -10%; right: -10%; width: 250px; height: 250px; background: #fcd34d; }
 
-  .status-text { text-align: center; font-size: 0.85rem; color: var(--text-light); }
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
-  /* --- Utilities --- */
-  .hidden { display: none !important; }
-  .fade-in { animation: fadeIn 0.4s ease-out; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .main-container { width: 100%; max-width: 400px; padding: 20px; }
+  .card { background: rgba(255,255,255,0.7); backdrop-filter: blur(16px); border-radius: 24px; padding: 30px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.5); }
   
-  footer { text-align: center; margin-top: 30px; color: #94a3b8; font-size: 0.75rem; }
-
-  /* --- Loading & Toast --- */
-  .overlay {
-    position: fixed; inset: 0; background: rgba(255,255,255,0.9);
-    z-index: 100; display: flex; flex-direction: column;
-    justify-content: center; align-items: center; backdrop-filter: blur(5px);
-  }
-  .loader {
-    width: 48px; height: 48px; border: 5px solid #e2e8f0;
-    border-bottom-color: var(--primary); border-radius: 50%;
-    animation: rotation 1s linear infinite; margin-bottom: 15px;
-  }
-  @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-  .toast {
-    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px);
-    background: #1e293b; color: white; padding: 12px 24px; border-radius: 30px;
-    font-size: 0.9rem; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 200;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2); white-space: nowrap;
-  }
-  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-  .toast.error { background: #ef4444; }
-  .toast.success { background: #10b981; }
+  input { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: none; background: rgba(255,255,255,0.8); box-sizing: border-box;}
+  .btn { width: 100%; padding: 15px; border-radius: 15px; border: none; font-weight: bold; cursor: pointer; margin-top: 10px; }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-secondary { background: #ddd; }
+  
+  .camera-wrapper { width: 100%; height: 300px; background: black; border-radius: 20px; overflow: hidden; margin: 15px 0; }
+  video, img { width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); }
+  .hidden { display: none; }
+  
+  #loadingOverlay { position: fixed; inset: 0; background: rgba(0,0,0,0.8); color: white; display: flex; justify-content: center; align-items: center; z-index: 99; }
 </style>
