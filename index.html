@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Sistem Absensi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    <?!= include("style"); ?>
+  </style>
+</head>
+<body>
+
+  <div class="bg-circle circle-1"></div>
+  <div class="bg-circle circle-2"></div>
+
+  <div class="main-container">
+    
+    <header>
+      <div class="logo">📍</div>
+      <div>
+        <h1>Absensi Pintar</h1>
+        <p>SMK Digital Indonesia</p>
+      </div>
+    </header>
+
+    <div class="card glass-effect">
+      
+      <div id="section-login" class="fade-in">
+        <div class="input-group">
+          <label>Nomor Induk Siswa</label>
+          <input id="nis" type="number" placeholder="Contoh: 12345" autocomplete="off">
+        </div>
+        
+        <div class="input-group">
+          <label>Kode PIN</label>
+          <input id="pin" type="password" placeholder="••••••">
+        </div>
+
+        <button onclick="handleLogin()" id="btnLogin" class="btn-primary">
+          Masuk Sekarang
+          <span class="icon">➜</span>
+        </button>
+      </div>
+
+      <div id="section-absen" class="hidden">
+        <div class="user-info">
+          <h2 id="dispNama">Nama Siswa</h2>
+          <span id="dispKelas" class="badge">Kelas ...</span>
+        </div>
+
+        <div class="camera-wrapper">
+          <video id="video" autoplay playsinline></video>
+          <canvas id="canvas" hidden></canvas>
+          <img id="hasilFoto" class="hidden">
+          <div class="scan-line"></div>
+        </div>
+
+        <p class="status-text" id="statusText">Pastikan wajah terlihat jelas</p>
+
+        <div id="action-buttons">
+          <button onclick="ambilFoto()" id="btnCapture" class="btn-primary">
+            📸 Ambil Foto
+          </button>
+        </div>
+
+        <div id="confirm-buttons" class="hidden">
+          <button onclick="kirimAbsen()" id="btnSend" class="btn-success">
+            ✅ Kirim Absen
+          </button>
+          <button onclick="ulangFoto()" class="btn-secondary">
+            🔄 Ulangi
+          </button>
+        </div>
+      </div>
+
+    </div>
+    
+    <footer>
+      &copy; 2024 Sistem Sekolah Digital
+    </footer>
+
+  </div>
+
+  <div id="loadingOverlay" class="hidden">
+    <div class="spinner"></div>
+    <p id="loadingText">Memproses...</p>
+  </div>
+
+  <div id="toast" class="toast hidden">Pesan Notifikasi</div>
+
+  <script>
+    <?!= include("script"); ?>
+  </script>
+</body>
+</html>
