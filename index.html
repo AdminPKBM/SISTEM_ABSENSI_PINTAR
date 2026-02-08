@@ -3,110 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#4f46e5"> <title>Sistem Absensi</title>
+  <title>Absensi Pintar</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     <?!= include("style"); ?>
   </style>
 </head>
 <body>
-
   <div class="blob blob-1"></div>
   <div class="blob blob-2"></div>
-  <div class="blob blob-3"></div>
 
   <div class="main-container">
-    
     <header>
-      <div class="logo-container">
-        <span class="logo-icon">🏫</span>
-      </div>
+      <div class="logo-container">📍</div>
       <div class="header-text">
-        <h1>Absensi Pintar</h1>
-        <p>SMK Digital Indonesia</p>
+        <h1>Absensi Digital</h1>
+        <p>SMK Indonesia Maju</p>
       </div>
     </header>
 
     <div class="card glass-effect">
-      
-      <div id="section-login" class="section-content fade-in">
-        <div class="login-header">
-          <h3>Selamat Datang</h3>
-          <p>Silakan masuk untuk absen</p>
-        </div>
-
+      <div id="section-login" class="fade-in">
         <div class="input-group">
-          <div class="icon-input">🆔</div>
-          <input id="nis" type="number" placeholder="NIS Siswa" autocomplete="off">
+          <input id="nis" type="number" placeholder="NIS Siswa">
         </div>
-        
         <div class="input-group">
-          <div class="icon-input">🔒</div>
           <input id="pin" type="password" placeholder="Kode PIN">
         </div>
-
-        <button onclick="handleLogin()" id="btnLogin" class="btn btn-primary ripple">
-          <span>Masuk Sekarang</span>
-          <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-        </button>
+        <button onclick="handleLogin()" class="btn btn-primary">Masuk</button>
       </div>
 
-      <div id="section-absen" class="section-content hidden">
+      <div id="section-absen" class="hidden">
         <div class="user-badge">
-          <div class="avatar-placeholder" id="initials">👤</div>
-          <div class="user-details">
-            <h2 id="dispNama">Siswa</h2>
-            <span id="dispKelas" class="badge">Kelas ...</span>
-          </div>
+          <h2 id="dispNama">Siswa</h2>
+          <span id="dispKelas">Kelas</span>
         </div>
-
-        <div class="camera-container">
-          <div class="camera-wrapper">
-            <video id="video" autoplay playsinline></video>
-            <canvas id="canvas" hidden></canvas>
-            <img id="hasilFoto" class="hidden">
-            <div class="scan-overlay">
-                <div class="scan-line"></div>
-            </div>
-          </div>
-          <div class="camera-corner corner-tl"></div>
-          <div class="camera-corner corner-tr"></div>
-          <div class="camera-corner corner-bl"></div>
-          <div class="camera-corner corner-br"></div>
+        <div class="camera-wrapper">
+          <video id="video" autoplay playsinline></video>
+          <canvas id="canvas" hidden></canvas>
+          <img id="hasilFoto" class="hidden">
         </div>
-
-        <p class="status-text" id="statusText">Posisikan wajah di dalam kotak</p>
-
-        <div id="action-buttons">
-          <button onclick="ambilFoto()" id="btnCapture" class="btn btn-primary ripple">
-            📸 Ambil Foto
-          </button>
-        </div>
-
-        <div id="confirm-buttons" class="hidden grid-2">
-          <button onclick="ulangFoto()" class="btn btn-secondary ripple">
-            🔄 Ulangi
-          </button>
-          <button onclick="kirimAbsen()" id="btnSend" class="btn btn-success ripple">
-            ✅ Kirim
-          </button>
+        <button onclick="ambilFoto()" id="btnCapture" class="btn btn-primary">📸 Ambil Foto</button>
+        <div id="confirm-buttons" class="hidden">
+          <button onclick="kirimAbsen()" class="btn btn-success">✅ Kirim</button>
+          <button onclick="ulangFoto()" class="btn btn-secondary">🔄 Ulang</button>
         </div>
       </div>
-
     </div>
-    
-    <footer>
-      <p>&copy; 2024 Sistem Sekolah Digital v2.0</p>
-    </footer>
-
   </div>
-
-  <div id="loadingOverlay" class="overlay hidden">
-    <div class="loader"></div>
-    <p id="loadingText">Memproses...</p>
-  </div>
-
-  <div id="toast" class="toast hidden">Pesan Notifikasi</div>
+  
+  <div id="loadingOverlay" class="hidden">⏳ Memproses...</div>
+  <div id="toast" class="hidden">Notifikasi</div>
 
   <script>
     <?!= include("script"); ?>
