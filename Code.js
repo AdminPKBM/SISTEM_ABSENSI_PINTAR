@@ -4,7 +4,7 @@
  * ==========================================
  */
 // ⚠️ GANTI DENGAN TOKEN BARU (Token lama sudah tidak aman)
-const GITHUB_TOKEN = "ghp_MASUKKAN_TOKEN_BARU_DISINI"; 
+const GITHUB_TOKEN = "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"; 
 const GITHUB_USER  = "AdminPKBM";
 const GITHUB_REPO  = "SISTEM_ABSENSI_PINTAR";
 const SHEET_ISSUES = "GITHUB_ISSUES";
@@ -87,7 +87,7 @@ function formatTable(sheet, rows) {
  */
 const SHEET_SISWA = "SISWA";
 const SHEET_ABSEN = "ABSENSI";
-const ID_FOLDER_FOTO = "MASUKKAN_ID_FOLDER_DRIVE_DISINI"; // ⚠️ WAJIB DIISI
+const ID_FOLDER_FOTO = "13J38BUdjv0r2hbZ65hna4e-f8UucIHVn"; // ⚠️ WAJIB DIISI
 
 // Lokasi Sekolah (Default: Jakarta Pusat, sesuaikan!)
 const LAT_SEKOLAH = -6.2088; 
